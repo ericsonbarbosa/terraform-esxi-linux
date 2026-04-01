@@ -1,0 +1,30 @@
+---
+- name: Baseline Ubuntu - Preparacao para KVM/Terraform
+  block:
+    - name: Atualizar o cache do APT e instalar pacotes base
+      ansible.builtin.apt:
+        name:
+          - qemu-kvm
+          - libvirt-daemon-system
+          - libvirt-clients
+          - virtinst
+          - bridge-utils
+          - virt-manager
+          - cloud-image-utils
+          - ansible
+          - wget
+          - unzip
+        state: present
+        update_cache: yes # Substitui o "sudo apt update"
+
+    - name: Garantir que o servico libvirtd esta rodando e habilitado no boot
+      ansible.builtin.service:
+        name: libvirtd
+        state: started
+        enabled: yes
+
+    - name: Adicionar o usuario ericson aos grupos libvirt e kvm (Boas Praticas)
+      ansible.builtin.user:
+        name: ericson
+        groups: libvirt,kvm
+        append: yes

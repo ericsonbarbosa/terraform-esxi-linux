@@ -37,4 +37,8 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Ignorar arquivos do vault
+vault.yml
+*.retry
+
 # End of https://www.toptal.com/developers/gitignore/api/terraform

@@ -1,0 +1,12 @@
+---
+- name: Baseline Linux Ubuntu Server - KVM Host
+  hosts: ubuntu_kvm
+  become: yes 
+  gather_facts: yes
+
+  # Força o Ansible a ler o arquivo de senhas
+  vars_files:
+    - ../inventories/dev/group_vars/ubuntu_kvm/vault.yml
+
+  roles:
+    - role: ../roles/kvm_host
